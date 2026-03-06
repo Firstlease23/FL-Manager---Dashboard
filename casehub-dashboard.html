@@ -1209,6 +1209,7 @@ readUrlParams();
 render();
 // Re-check localStorage after delay in case bookmarklet wrote data after page load
 setTimeout(() => { readUrlParams(); render(); }, 1500);
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
 function openExportModal() {
