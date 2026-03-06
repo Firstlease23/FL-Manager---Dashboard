@@ -741,12 +741,12 @@
       <div class="kpi-delta" id="delta-rejected">Ingen historik</div>
     </div>
     <div class="kpi-card" style="--card-color: var(--accent)">
-      <div class="kpi-label">Nye sager</div>
+      <div class="kpi-label">Tilbud/Kladdearkiv</div>
       <div class="kpi-value" id="kpi-new">—</div>
       <div class="kpi-delta" id="delta-new">Ingen historik</div>
     </div>
     <div class="kpi-card" style="--card-color: var(--accent4)">
-      <div class="kpi-label">Under behandling</div>
+      <div class="kpi-label">Afventer godkendelse</div>
       <div class="kpi-value" id="kpi-pending">—</div>
       <div class="kpi-delta" id="delta-pending">Ingen historik</div>
     </div>
@@ -801,11 +801,11 @@
         <input type="number" id="in-rejected" placeholder="0" min="0">
       </div>
       <div class="input-group">
-        <label style="color: var(--accent)">Nye sager</label>
+        <label style="color: var(--accent)">Tilbud/Kladdearkiv</label>
         <input type="number" id="in-new" placeholder="0" min="0">
       </div>
       <div class="input-group">
-        <label style="color: var(--accent4)">Under behandling</label>
+        <label style="color: var(--accent4)">Afventer godkendelse</label>
         <input type="number" id="in-pending" placeholder="0" min="0">
       </div>
       <div class="input-group">
@@ -866,8 +866,8 @@
           <th>Dato & tid</th>
           <th style="color: var(--accent2)">Godkendte</th>
           <th style="color: var(--accent3)">Afviste</th>
-          <th style="color: var(--accent)">Nye</th>
-          <th style="color: var(--accent4)">Under beh.</th>
+          <th style="color: var(--accent)">Tilbud/Kladder</th>
+          <th style="color: var(--accent4)">Afventer godk.</th>
           <th style="color: var(--accent5)">Annullerede</th>
           <th>Total</th>
           <th></th>
@@ -930,7 +930,7 @@ const bookmarkletCode = `javascript:(function(){
 
   var total=counts.approved+counts.rejected+counts.new_cases+counts.pending+counts.cancelled;
   var msg=total>0?
-    'Fandt '+total+' sager!\\n\\nGodkendte: '+counts.approved+'\\nAfviste: '+counts.rejected+'\\nNye: '+counts.new_cases+'\\nUnder behandling: '+counts.pending+'\\nAnnullerede: '+counts.cancelled+'\\n\\nKlik OK for at åbne dashboard med disse tal.':
+    'Fandt '+total+' sager!\\n\\nGodkendte: '+counts.approved+'\\nAfviste: '+counts.rejected+'\\nTilbud/Kladder: '+counts.new_cases+'\\nAfventer godkendelse: '+counts.pending+'\\nAnnullerede: '+counts.cancelled+'\\n\\nKlik OK for at åbne dashboard med disse tal.':
     'Kunne ikke automatisk tælle sager fra denne side.\\nPrøv at navigere til sagsoversigten i CaseHub.\\n\\nKlik OK for at åbne dashboard alligevel.';
   
   if(confirm(msg)){
@@ -1036,8 +1036,8 @@ const COLORS = {
 const LABELS = {
   approved: 'Godkendte',
   rejected: 'Afviste',
-  new_cases: 'Nye sager',
-  pending: 'Under behandling',
+  new_cases: 'Tilbud/Kladdearkiv',
+  pending: 'Afventer godkendelse',
   cancelled: 'Annullerede',
 };
 
@@ -1231,7 +1231,7 @@ function doExport() {
   if (type === 'full' || type === 'latest') {
     const rows = type === 'latest' ? [data[data.length - 1]] : data;
     const wsData = [
-      ['Dato & Tid', 'Godkendte', 'Afviste', 'Nye sager', 'Under behandling', 'Annullerede', 'Total'],
+      ['Dato & Tid', 'Godkendte', 'Afviste', 'Tilbud/Kladdearkiv', 'Afventer godkendelse', 'Annullerede', 'Total'],
       ...rows.map(e => {
         const total = e.approved + e.rejected + e.new_cases + e.pending + e.cancelled;
         return [new Date(e.ts).toLocaleString('da-DK'), e.approved, e.rejected, e.new_cases, e.pending, e.cancelled, total];
@@ -1244,7 +1244,7 @@ function doExport() {
 
   if (type === 'summary') {
     const fields = ['approved','rejected','new_cases','pending','cancelled'];
-    const labels = ['Godkendte','Afviste','Nye sager','Under behandling','Annullerede'];
+    const labels = ['Godkendte','Afviste','Tilbud/Kladdearkiv','Afventer godkendelse','Annullerede'];
     const latest = data[data.length - 1];
     const latestTotal = fields.reduce((s, f) => s + latest[f], 0);
 
@@ -1273,7 +1273,7 @@ function doExport() {
     XLSX.utils.book_append_sheet(wb, wsSummary, 'Opsummering');
 
     const wsData = [
-      ['Dato & Tid', 'Godkendte', 'Afviste', 'Nye sager', 'Under behandling', 'Annullerede', 'Total'],
+      ['Dato & Tid', 'Godkendte', 'Afviste', 'Tilbud/Kladdearkiv', 'Afventer godkendelse', 'Annullerede', 'Total'],
       ...data.map(e => {
         const total = e.approved + e.rejected + e.new_cases + e.pending + e.cancelled;
         return [new Date(e.ts).toLocaleString('da-DK'), e.approved, e.rejected, e.new_cases, e.pending, e.cancelled, total];
