@@ -868,6 +868,15 @@
     </div>
   </div>
 
+  <!-- MAIN TABS -->
+  <div class="main-tabs">
+    <button class="main-tab active" onclick="switchTab('statistik', this)">📊 STATISTIK</button>
+    <button class="main-tab" onclick="switchTab('fejl', this)">🔍 FEJLSØGNING</button>
+  </div>
+
+  <!-- TAB: STATISTIK -->
+  <div class="tab-panel active" id="tab-statistik">
+
   <!-- KPI CARDS -->
   <div class="kpi-grid">
     <div class="kpi-card" style="--card-color: var(--accent2)">
@@ -1022,6 +1031,8 @@
   </div><!-- end tab-statistik -->
 
   <!-- TAB: FEJL -->
+  </div><!-- end tab-statistik -->
+
   <div class="tab-panel" id="tab-fejl">
     <div class="fejl-section">
       <div class="section-header">
