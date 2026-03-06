@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FirstLease · CaseHub Dashboard</title>
+<title>First Lease · FL Manager</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -680,8 +680,8 @@
   <!-- HEADER -->
   <header>
     <div class="logo-area">
-      <h1>First<span>Lease</span> · CaseHub</h1>
-      <p>Sagsstatistik Dashboard</p>
+      <h1>First<span>Lease</span> · FL Manager</h1>
+      <p>Sagsstatistik</p>
     </div>
     <div class="header-right">
       <button class="btn-export" onclick="openExportModal()">
@@ -1249,7 +1249,7 @@ function doExport() {
     const latestTotal = fields.reduce((s, f) => s + latest[f], 0);
 
     const summaryRows = [
-      ['FirstLease CaseHub - Sagsstatistik Opsummering', '', '', '', '', ''],
+      ['First Lease FL Manager - Sagsstatistik Opsummering', '', '', '', '', ''],
       ['Genereret:', new Date().toLocaleString('da-DK'), '', '', '', ''],
       ['Antal snapshots:', data.length, '', '', '', ''],
       ['Periode fra:', new Date(data[0].ts).toLocaleDateString('da-DK'), '', '', '', ''],
