@@ -7,17 +7,17 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0e1a;
-    --surface: #111827;
-    --surface2: #1a2235;
-    --border: #1f2d45;
-    --accent: #00d4ff;
-    --accent2: #00ff9d;
-    --accent3: #ff6b6b;
-    --accent4: #ffd166;
-    --accent5: #c77dff;
-    --text: #e8f0fe;
-    --muted: #6b7a99;
+    --bg: #f0f4f8;
+    --surface: #ffffff;
+    --surface2: #e8eef5;
+    --border: #d0dae6;
+    --accent: #0066cc;
+    --accent2: #00a86b;
+    --accent3: #e63946;
+    --accent4: #e09000;
+    --accent5: #7b2fbe;
+    --text: #1a2340;
+    --muted: #5a6a85;
     --font-head: 'Syne', sans-serif;
     --font-mono: 'DM Mono', monospace;
   }
@@ -39,7 +39,7 @@
     left: -20%;
     width: 60%;
     height: 80%;
-    background: radial-gradient(ellipse, rgba(0,212,255,0.04) 0%, transparent 70%);
+    background: radial-gradient(ellipse, rgba(0,102,204,0.06) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
   }
@@ -51,7 +51,7 @@
     right: -10%;
     width: 50%;
     height: 60%;
-    background: radial-gradient(ellipse, rgba(0,255,157,0.03) 0%, transparent 70%);
+    background: radial-gradient(ellipse, rgba(0,168,107,0.05) 0%, transparent 70%);
     pointer-events: none;
     z-index: 0;
   }
@@ -98,7 +98,7 @@
     width: 8px; height: 8px;
     border-radius: 50%;
     background: var(--accent2);
-    box-shadow: 0 0 12px var(--accent2);
+    box-shadow: none;
     animation: pulse 2s infinite;
   }
 
@@ -128,7 +128,7 @@
 
   .btn-export:hover {
     background: rgba(0,255,157,0.1);
-    box-shadow: 0 0 16px rgba(0,255,157,0.25);
+    box-shadow: 0 2px 12px rgba(0,168,107,0.2);
   }
 
   .export-modal-overlay {
@@ -214,7 +214,7 @@
     transition: box-shadow 0.2s;
   }
 
-  .btn-do-export:hover { box-shadow: 0 4px 16px rgba(0,255,157,0.4); }
+  .btn-do-export:hover { box-shadow: 0 4px 12px rgba(0,168,107,0.3); }
 
   /* KPI GRID */
   .kpi-grid {
@@ -269,7 +269,7 @@
     font-weight: 800;
     line-height: 1;
     color: var(--card-color, var(--accent));
-    text-shadow: 0 0 20px color-mix(in srgb, var(--card-color, var(--accent)) 40%, transparent);
+    text-shadow: none;
   }
 
   .kpi-delta {
@@ -471,7 +471,7 @@
 
   .input-group input:focus {
     border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(0,212,255,0.1);
+    box-shadow: 0 0 0 3px rgba(0,102,204,0.12);
   }
 
   .btn-add {
@@ -491,7 +491,7 @@
 
   .btn-add:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 20px rgba(0,212,255,0.4);
+    box-shadow: 0 4px 16px rgba(0,102,204,0.25);
   }
 
   .btn-add:active { transform: translateY(0); }
@@ -560,7 +560,7 @@
   }
 
   .bookmarklet-link:hover {
-    box-shadow: 0 4px 24px rgba(0,212,255,0.5);
+    box-shadow: 0 4px 16px rgba(0,102,204,0.3);
   }
 
   .drag-hint {
@@ -672,6 +672,146 @@
     .input-grid { grid-template-columns: repeat(2, 1fr); }
     .steps { flex-wrap: wrap; }
   }
+
+  /* TABS */
+  .main-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0;
+  }
+
+  .main-tab {
+    font-family: var(--font-head);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .main-tab:hover { color: var(--text); }
+  .main-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* FEJL TOOL */
+  .fejl-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+
+  .fejl-row { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 20px; }
+
+  .fejl-field { display: flex; flex-direction: column; gap: 5px; }
+  .fejl-field label { font-size: 0.62rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .fejl-field input[type=number] {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    padding: 10px 14px;
+    width: 130px;
+    outline: none;
+    -moz-appearance: textfield;
+  }
+  .fejl-field input[type=number]::-webkit-outer-spin-button,
+  .fejl-field input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
+  .fejl-field input[type=number]:focus { border-color: var(--accent3); box-shadow: 0 0 0 3px rgba(255,107,107,0.15); }
+
+  .btn-scan {
+    background: var(--accent3);
+    color: var(--bg);
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font-head);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 12px 22px;
+    cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .btn-scan:hover { box-shadow: 0 4px 12px rgba(230,57,70,0.25); transform: translateY(-1px); }
+  .btn-scan:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  .btn-excel-scan {
+    background: var(--accent2);
+    color: var(--bg);
+    border: none;
+    border-radius: 8px;
+    font-family: var(--font-head);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 12px 22px;
+    cursor: pointer;
+    display: none;
+    transition: box-shadow 0.2s;
+  }
+  .btn-excel-scan:hover { box-shadow: 0 4px 12px rgba(0,168,107,0.2); }
+
+  .scan-prog-wrap { background: var(--border); border-radius: 8px; height: 6px; overflow: hidden; margin-bottom: 8px; display: none; }
+  .scan-prog-bar { height: 100%; background: linear-gradient(90deg, var(--accent3), #f48a8a); border-radius: 8px; width: 0%; transition: width 0.2s; }
+  .scan-prog-lbl { font-size: 0.68rem; color: var(--muted); margin-bottom: 16px; display: none; }
+
+  .fejl-kpi-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 12px; margin-bottom: 20px; display: none; }
+  .fejl-kpi { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .fejl-kpi .v { font-family: var(--font-head); font-size: 2rem; font-weight: 800; line-height: 1; }
+  .fejl-kpi .l { font-size: 0.62rem; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  .fejl-date-bar { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 18px; display: none; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .fejl-date-bar label { font-size: 0.62rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .fejl-date-input { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 6px 10px; font-size: 0.75rem; outline: none; color: var(--text); font-family: var(--font-mono); }
+  .fejl-date-input:focus { border-color: var(--accent3); }
+  .ch-quick-btn { padding: 5px 12px; border-radius: 6px; font-size: 0.68rem; font-weight: 600; cursor: pointer; background: var(--border); color: var(--muted); border: none; transition: background 0.2s, color 0.2s; }
+  .ch-quick-btn:hover, .ch-quick-btn.active { background: var(--accent3); color: var(--bg); }
+  .ch-date-clear-btn { padding: 5px 12px; border-radius: 6px; font-size: 0.68rem; font-weight: 600; cursor: pointer; background: transparent; color: var(--muted); border: 1px solid var(--border); }
+
+  .fejl-results { display: none; }
+  .fejl-results-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px; }
+  .fejl-results-head h3 { font-family: var(--font-head); font-size: 0.9rem; font-weight: 700; margin: 0; }
+  .fejl-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+  .fejl-tab { padding: 5px 14px; border-radius: 6px; font-size: 0.7rem; font-weight: 600; cursor: pointer; background: var(--surface2); color: var(--muted); border: none; transition: background 0.2s, color 0.2s; }
+  .fejl-tab.active { background: var(--accent3); color: var(--bg); }
+  .fejl-badge { background: rgba(230,57,70,0.1); color: var(--accent3); border-radius: 20px; padding: 4px 12px; font-size: 0.72rem; font-weight: 700; }
+
+  .fejl-tbl-wrap { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .fejl-tbl-wrap table { width: 100%; border-collapse: collapse; }
+  .fejl-tbl-wrap thead th { background: var(--surface2); padding: 10px 16px; text-align: left; font-size: 0.62rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid var(--border); }
+  .fejl-tbl-wrap tbody tr { border-bottom: 1px solid var(--border); }
+  .fejl-tbl-wrap tbody tr:last-child { border-bottom: none; }
+  .fejl-tbl-wrap tbody tr:hover td { background: var(--surface2); }
+  .fejl-tbl-wrap td { padding: 11px 16px; font-size: 0.75rem; vertical-align: top; }
+  .fejl-tbl-wrap td a { color: var(--accent); font-weight: 700; text-decoration: none; }
+  .fejl-tbl-wrap tbody tr.ch-dimmed { opacity: 0.3; }
+
+  .ch-tag { display: inline-block; border-radius: 5px; padding: 2px 8px; font-size: 0.62rem; font-weight: 700; }
+  .tag-nav { background: rgba(0,102,204,0.1); color: var(--accent); }
+  .tag-file { background: rgba(224,144,0,0.1); color: var(--accent4); }
+  .tag-credit { background: rgba(123,47,190,0.1); color: var(--accent5); }
+  .tag-job { background: rgba(230,57,70,0.1); color: var(--accent3); }
+  .tag-job-running { background: rgba(0,102,204,0.08); color: var(--accent); }
+  .tag-mail { background: rgba(123,47,190,0.1); color: var(--accent5); }
+
+  .ch-err-code { font-weight: 600; color: var(--accent3); font-size: 0.7rem; }
+  .ch-err-msg { font-size: 0.7rem; color: var(--muted); margin-top: 2px; word-break: break-word; }
+  .ch-ts { font-size: 0.65rem; color: var(--muted); white-space: nowrap; }
+
+  .fejl-empty { display: none; text-align: center; padding: 48px; color: var(--muted); font-size: 0.8rem; }
+  .fejl-empty .ico { font-size: 2.5rem; margin-bottom: 8px; }
+
 </style>
 </head>
 <body>
@@ -878,6 +1018,81 @@
       </tbody>
     </table>
   </div>
+
+  </div><!-- end tab-statistik -->
+
+  <!-- TAB: FEJL -->
+  <div class="tab-panel" id="tab-fejl">
+    <div class="fejl-section">
+      <div class="section-header">
+        <div class="section-title">🔍 Fejlscanning</div>
+        <span class="badge" style="border-color:var(--accent3);color:var(--accent3)">Navision · Kredit · Jobs · Mail</span>
+      </div>
+      <div class="fejl-row">
+        <div class="fejl-field">
+          <label>Fra sagsnr.</label>
+          <input type="number" id="ch-from" value="5500">
+        </div>
+        <div class="fejl-field">
+          <label>Til sagsnr.</label>
+          <input type="number" id="ch-to" value="5600">
+        </div>
+        <button class="btn-scan" id="ch-btn" onclick="chRun()">🔍 Kør scanning</button>
+        <button class="btn-excel-scan" id="ch-excel-btn" onclick="chExport()">⬇ Download Excel</button>
+      </div>
+      <div class="scan-prog-wrap" id="ch-prog-wrap"><div class="scan-prog-bar" id="ch-prog-bar"></div></div>
+      <div class="scan-prog-lbl" id="ch-prog-lbl"></div>
+
+      <div class="fejl-kpi-grid" id="ch-stats">
+        <div class="fejl-kpi"><div class="v" id="ch-v-total" style="color:var(--accent)">0</div><div class="l">Sager scannet</div></div>
+        <div class="fejl-kpi"><div class="v" id="ch-v-errors" style="color:var(--accent3)">0</div><div class="l">Sager med fejl</div></div>
+        <div class="fejl-kpi"><div class="v" id="ch-v-count" style="color:var(--accent4)">0</div><div class="l">Fejl i alt</div></div>
+        <div class="fejl-kpi"><div class="v" id="ch-v-jobs" style="color:var(--accent5)">0</div><div class="l">Fejlede jobs</div></div>
+        <div class="fejl-kpi"><div class="v" id="ch-v-ok" style="color:var(--accent2)">0</div><div class="l">Sager OK</div></div>
+      </div>
+
+      <div class="fejl-date-bar" id="ch-date-bar">
+        <label>Dato filter:</label>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="ch-quick-btn" onclick="chQuickDate(7,this)">7 dage</button>
+          <button class="ch-quick-btn" onclick="chQuickDate(14,this)">14 dage</button>
+          <button class="ch-quick-btn" onclick="chQuickDate(30,this)">30 dage</button>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <label>Fra:</label>
+          <input type="date" class="fejl-date-input" id="ch-date-from" onchange="chDateChanged()">
+          <label>Til:</label>
+          <input type="date" class="fejl-date-input" id="ch-date-to" onchange="chDateChanged()">
+          <button class="ch-date-clear-btn" onclick="chDateClear()">Ryd filter</button>
+        </div>
+      </div>
+
+      <div class="fejl-results" id="ch-results">
+        <div class="fejl-results-head">
+          <h3>Fejloversigt</h3>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <div class="fejl-tabs">
+              <button class="fejl-tab active" onclick="chFilter('all',this)">Alle</button>
+              <button class="fejl-tab" onclick="chFilter('nav',this)">Navision</button>
+              <button class="fejl-tab" onclick="chFilter('file',this)">Fil</button>
+              <button class="fejl-tab" onclick="chFilter('credit',this)">Kredit</button>
+              <button class="fejl-tab" onclick="chFilter('job',this)">Jobs</button>
+              <button class="fejl-tab" onclick="chFilter('mail',this)">Mail</button>
+            </div>
+            <div class="fejl-badge" id="ch-badge">0 fejl</div>
+          </div>
+        </div>
+        <div class="fejl-tbl-wrap" id="ch-tbl-wrap">
+          <table>
+            <thead><tr><th>Sag</th><th>Kilde</th><th>Type / Info</th><th>Fejlkode</th><th>Fejlbesked</th><th>Tidspunkt</th></tr></thead>
+            <tbody id="ch-tbody"></tbody>
+          </table>
+        </div>
+        <div class="fejl-empty" id="ch-empty"><div class="ico">✅</div><div>Ingen fejl fundet!</div></div>
+      </div>
+    </div>
+  </div><!-- end tab-fejl -->
+
 
 </div>
 
@@ -1209,6 +1424,250 @@ readUrlParams();
 render();
 // Re-check localStorage after delay in case bookmarklet wrote data after page load
 setTimeout(() => { readUrlParams(); render(); }, 1500);
+
+// ─── Tab switching ────────────────────────────────────────────────────────────
+function switchTab(name, el) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  el.classList.add('active');
+}
+
+// ─── Fejlsøgning ─────────────────────────────────────────────────────────────
+window.chRows = [];
+window.chScanRange = {from:0,to:0};
+window.chCurrentFilter = 'all';
+window.chDateFrom = null;
+window.chDateTo = null;
+
+try {
+  var sv = localStorage.getItem('ch-scan-range');
+  if (sv) { var sp = JSON.parse(sv); document.getElementById('ch-from').value = sp.from; document.getElementById('ch-to').value = sp.to; }
+} catch(e) {}
+
+window.chQuickDate = function(days, el) {
+  document.querySelectorAll('.ch-quick-btn').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+  var to = new Date(), from = new Date();
+  from.setDate(from.getDate() - days);
+  window.chDateFrom = from; window.chDateTo = to;
+  document.getElementById('ch-date-from').value = from.toISOString().slice(0,10);
+  document.getElementById('ch-date-to').value = to.toISOString().slice(0,10);
+  chRender();
+};
+
+window.chDateChanged = function() {
+  document.querySelectorAll('.ch-quick-btn').forEach(b => b.classList.remove('active'));
+  var f = document.getElementById('ch-date-from').value, t = document.getElementById('ch-date-to').value;
+  window.chDateFrom = f ? new Date(f) : null;
+  window.chDateTo = t ? new Date(t + 'T23:59:59') : null;
+  chRender();
+};
+
+window.chDateClear = function() {
+  document.querySelectorAll('.ch-quick-btn').forEach(b => b.classList.remove('active'));
+  window.chDateFrom = null; window.chDateTo = null;
+  document.getElementById('ch-date-from').value = '';
+  document.getElementById('ch-date-to').value = '';
+  chRender();
+};
+
+window.chInDateRange = function(created) {
+  if (!window.chDateFrom && !window.chDateTo) return true;
+  if (!created) return false;
+  var d = new Date(created);
+  if (window.chDateFrom && d < window.chDateFrom) return false;
+  if (window.chDateTo && d > window.chDateTo) return false;
+  return true;
+};
+
+window.chFilter = function(type, el) {
+  window.chCurrentFilter = type;
+  document.querySelectorAll('.fejl-tab').forEach(t => { t.classList.remove('active'); });
+  el.classList.add('active');
+  chRender();
+};
+
+window.chRender = function() {
+  var filtered = window.chCurrentFilter === 'all' ? window.chRows : window.chRows.filter(r => r.source === window.chCurrentFilter);
+  var tbody = document.getElementById('ch-tbody');
+  var empty = document.getElementById('ch-empty');
+  var wrap = document.getElementById('ch-tbl-wrap');
+  document.getElementById('ch-badge').textContent = filtered.length + ' fejl';
+  if (filtered.length === 0) {
+    tbody.innerHTML = ''; wrap.style.display = 'none'; empty.style.display = 'block';
+  } else {
+    wrap.style.display = 'block'; empty.style.display = 'none';
+    tbody.innerHTML = filtered.map(r => {
+      var d = r.created ? new Date(r.created) : null;
+      var ts = d ? d.toLocaleDateString('da-DK') + ' ' + d.toLocaleTimeString('da-DK', {hour:'2-digit',minute:'2-digit'}) : '–';
+      var tagClass = r.source==='job' && r.jobStatus==='running' ? 'tag-job-running' : ({nav:'tag-nav',file:'tag-file',credit:'tag-credit',job:'tag-job',mail:'tag-mail'}[r.source]||'tag-nav');
+      var tagLabel = r.source==='job' ? (r.jobStatus==='running' ? 'Job: hænger' : 'Job: fejlet') : ({nav:'Kontrakt',file:'Fil',credit:'Kredit',mail:'Mail'}[r.source]||r.source);
+      var inRange = window.chInDateRange(r.created);
+      var msg = r.msg && r.msg.length > 200 ? r.msg.substring(0,200) + '...' : (r.msg||'–');
+      return `<tr class="${inRange?'':'ch-dimmed'}">
+        <td><a href="/application/${r.appId}" target="_blank">#${r.appId}</a></td>
+        <td><span class="ch-tag ${tagClass}">${tagLabel}</span></td>
+        <td style="font-size:0.7rem;max-width:160px;word-break:break-word">${r.info||'–'}</td>
+        <td><div class="ch-err-code">${r.code||'–'}</div></td>
+        <td><div class="ch-err-msg" style="max-width:280px">${msg}</div></td>
+        <td class="ch-ts">${ts}</td>
+      </tr>`;
+    }).join('');
+  }
+};
+
+window.chExport = function() {
+  if (!window.XLSX) { showToast('SheetJS ikke indlæst endnu, prøv igen.'); return; }
+  if (!window.chRows.length) { showToast('Ingen fejl at eksportere.'); return; }
+  if (!confirm('Excel-filen indeholder potentielt persondata og skal behandles fortroligt.\nMå filen downloades?')) return;
+  var srcLabel = s => ({nav:'Kontrakt',file:'Fil',credit:'Kredit',job:'Job',mail:'Mail'}[s]||s);
+  var data = window.chRows.map(r => {
+    var d = r.created ? new Date(r.created) : null;
+    var ts = d ? d.toLocaleDateString('da-DK') + ' ' + d.toLocaleTimeString('da-DK', {hour:'2-digit',minute:'2-digit'}) : '';
+    return {'Sagsnr.':r.appId,'Kilde':srcLabel(r.source),'Type / Info':r.info||'','Fejlkode':r.code||'','Fejlbesked':r.msg||'','Tidspunkt':ts};
+  });
+  var ws = XLSX.utils.json_to_sheet(data);
+  ws['!cols'] = [{wch:10},{wch:10},{wch:35},{wch:35},{wch:80},{wch:18}];
+  var wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Fejl');
+  var today = new Date().toISOString().slice(0,10);
+  XLSX.writeFile(wb, 'fl-fejl-' + window.chScanRange.from + '-' + window.chScanRange.to + '-' + today + '.xlsx');
+};
+
+function maskCpr(text) {
+  if (!text) return text;
+  return String(text).replace(/\b(\d{6})-?(\d{4})\b/g, '******-****');
+}
+
+function extractJobErrors(id, jobs) {
+  jobs = jobs.filter(j => j.status === 'failed' || j.status === 'running');
+  return jobs.map(j => {
+    var msg = j.error || '';
+    var m = msg.match(/"message"\s*:\s*"([^"]+)"/);
+    if (m) msg = m[1]; else if (msg.length > 300) msg = msg.substring(0,300) + '...';
+    msg = maskCpr(msg);
+    return {appId:id,source:'job',jobStatus:j.status||'failed',info:j.jobType||'–',code:j.status||'failed',msg:msg,created:j.created||null};
+  });
+}
+
+function extractCreditErrors(id, data) {
+  var rows = [];
+  if (data.rki) {
+    var errors = data.rki && data.rki.data && (data.rki.data.errors || (data.rki.data.data && data.rki.data.data.errors));
+    if (errors && errors.length > 0) errors.forEach(e => rows.push({appId:id,source:'credit',info:'RKI',code:(e.extensions&&e.extensions.code)||'Fejl',msg:maskCpr(e.message||''),created:null}));
+  }
+  if (data.monthio) {
+    var ms = data.monthio.processingStatus;
+    if (ms && (ms==='error'||ms==='failed')) rows.push({appId:id,source:'credit',info:'Monthio',code:ms,msg:'Processing fejlede',created:null});
+  }
+  if (data.creditro && data.creditro.error) rows.push({appId:id,source:'credit',info:'Creditro',code:data.creditro.error.code||'Fejl',msg:maskCpr(data.creditro.error.message||''),created:null});
+  return rows;
+}
+
+window.chRun = async function() {
+  var from = parseInt(document.getElementById('ch-from').value);
+  var to = parseInt(document.getElementById('ch-to').value);
+  if (isNaN(from)||isNaN(to)||from>to) { showToast('Angiv et gyldigt interval'); return; }
+  window.chScanRange = {from, to};
+  try { localStorage.setItem('ch-scan-range', JSON.stringify({from, to})); } catch(e) {}
+  var btn = document.getElementById('ch-btn');
+  var excelBtn = document.getElementById('ch-excel-btn');
+  btn.disabled = true; btn.textContent = '⏳ Scanner...';
+  excelBtn.style.display = 'none';
+  document.getElementById('ch-prog-wrap').style.display = 'block';
+  document.getElementById('ch-prog-lbl').style.display = 'block';
+  window.chRows = [];
+  var scanned = 0, realScanned = 0, errorSags = new Set(), ok = 0, jobErrCount = 0;
+  var total = to - from + 1;
+
+  for (var id = from; id <= to; id++) {
+    try {
+      var results = await Promise.all([
+        fetch('/api/interopTransferLog/' + id, {credentials:'include'}),
+        fetch('/api/creditAnalysis/' + id, {credentials:'include'}),
+        fetch('/api/jobs/unsuccessful/' + id, {credentials:'include'}),
+        fetch('/api/application/get', {method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify({id})})
+      ]);
+      var [r1,r2,r3,r4] = results;
+      var hasError = false, exists = false;
+
+      if (r4.ok) {
+        exists = true;
+        try {
+          var appData = await r4.json();
+          var failedMails = (appData.mailhistory||[]).filter(m => !m.sent);
+          if (failedMails.length > 0) {
+            hasError = true;
+            failedMails.forEach(m => window.chRows.push({appId:id,source:'mail',info:maskCpr(m.subject||'–'),code:'Ikke sendt',msg:m.to?'Til: '+m.to:'Ingen modtager angivet',created:m.created}));
+          }
+        } catch(e) {}
+      }
+
+      if (r1.ok) {
+        try {
+          var d1 = await r1.json();
+          (d1.contractLogs||[]).forEach(log => {
+            if (log.responseType && log.responseType.toLowerCase() !== 'success') {
+              hasError = true;
+              var rErr = (log.responseJson && log.responseJson.error)||{};
+              window.chRows.push({appId:id,source:'nav',info:'Kontrakt #'+(log.contractNo||'–'),code:rErr.code||log.responseType,msg:maskCpr(rErr.message||log.errorMessage||''),created:log.created});
+            }
+          });
+          (d1.fileLogs||[]).forEach(log => {
+            if (!log.success) {
+              hasError = true;
+              var err = (log.responseJson && log.responseJson.error)||{};
+              window.chRows.push({appId:id,source:'file',info:log.filename||'–',code:err.code||'Fejl',msg:maskCpr(err.message||''),created:log.created});
+            }
+          });
+        } catch(e) {}
+      }
+
+      if (r2.ok) {
+        try {
+          var d2 = await r2.json();
+          if (d2 !== null) {
+            var ce = extractCreditErrors(id, d2);
+            if (ce.length > 0) { hasError = true; window.chRows.push(...ce); }
+          }
+        } catch(e) {}
+      }
+
+      if (r3.ok) {
+        try {
+          var jobs = await r3.json();
+          if (Array.isArray(jobs) && jobs.length > 0) {
+            var je = extractJobErrors(id, jobs);
+            if (je.length > 0) { hasError = true; jobErrCount += je.length; window.chRows.push(...je); }
+          }
+        } catch(e) {}
+      }
+
+      if (exists) { realScanned++; if (hasError) errorSags.add(id); else ok++; }
+    } catch(e) {}
+
+    scanned++;
+    document.getElementById('ch-prog-bar').style.width = Math.round(scanned/total*100) + '%';
+    document.getElementById('ch-prog-lbl').textContent = 'Scanner sag ' + id + '... (' + scanned + '/' + total + ')';
+    if (scanned % 10 === 0) await new Promise(r => setTimeout(r, 30));
+  }
+
+  document.getElementById('ch-v-total').textContent = realScanned;
+  document.getElementById('ch-v-errors').textContent = errorSags.size;
+  document.getElementById('ch-v-count').textContent = window.chRows.length;
+  document.getElementById('ch-v-jobs').textContent = jobErrCount;
+  document.getElementById('ch-v-ok').textContent = ok;
+  document.getElementById('ch-stats').style.display = 'grid';
+  window.chRows.sort((a,b) => b.appId - a.appId);
+  document.getElementById('ch-results').style.display = 'block';
+  document.getElementById('ch-date-bar').style.display = 'flex';
+  chRender();
+  document.getElementById('ch-prog-lbl').textContent = '✅ Scanning færdig – ' + realScanned + ' eksisterende sager gennemgået';
+  btn.disabled = false; btn.textContent = '🔍 Kør scanning';
+  if (window.chRows.length > 0) excelBtn.style.display = 'inline-block';
+};
+
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
