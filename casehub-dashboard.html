@@ -497,31 +497,11 @@
   .btn-add:active { transform: translateY(0); }
 
   /* BOOKMARKLET SECTION */
-  .bookmarklet-section {
-    background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
-    border: 1px solid var(--accent);
-    border-radius: 12px;
-    padding: 28px;
-    margin-bottom: 32px;
-    position: relative;
-    overflow: hidden;
-  }
+  
 
-  .bookmarklet-section::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  }
+  
 
-  .bookmarklet-intro {
-    font-size: 0.78rem;
-    color: var(--muted);
-    line-height: 1.7;
-    margin-bottom: 20px;
-    max-width: 700px;
-  }
+  
 
   .steps { display: flex; gap: 20px; margin-bottom: 24px; }
 
@@ -544,24 +524,9 @@
 
   .step-text { font-size: 0.7rem; color: var(--muted); line-height: 1.6; }
 
-  .bookmarklet-link {
-    display: inline-block;
-    background: var(--accent);
-    color: var(--bg);
-    font-family: var(--font-head);
-    font-size: 0.85rem;
-    font-weight: 700;
-    padding: 12px 24px;
-    border-radius: 8px;
-    text-decoration: none;
-    cursor: grab;
-    transition: box-shadow 0.2s;
-    user-select: none;
-  }
+  
 
-  .bookmarklet-link:hover {
-    box-shadow: 0 4px 16px rgba(0,102,204,0.3);
-  }
+  
 
   .drag-hint {
     font-size: 0.65rem;
@@ -821,44 +786,6 @@
     </div>
   </div>
 
-  <!-- BOOKMARKLET -->
-  <div class="bookmarklet-section">
-    <div class="section-header">
-      <div class="section-title">⚡ Automatisk indsamling fra CaseHub</div>
-      <span class="badge" style="border-color: var(--accent); color: var(--accent)">Anbefalet</span>
-    </div>
-    <p class="bookmarklet-intro">
-      Bookmarkletten nedenfor kører et lille script direkte i din browser mens du er inde på CaseHub.
-      Den forsøger at tælle sager automatisk og udfylder formularen ovenfor – du klikker bare "Gem Snapshot" bagefter.
-    </p>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">01</div>
-        <div class="step-text">Træk knappen nedenfor op til din browsers bogmærkelinje (eller højreklik → Tilføj bogmærke)</div>
-      </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <div class="step-text">Gå til <strong style="color:var(--text)">firstlease.casehub.dk</strong> og naviger til sagsoversigten</div>
-      </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <div class="step-text">Klik på bogmærket — scriptet tæller sager og åbner dette dashboard med data klar</div>
-      </div>
-      <div class="step">
-        <div class="step-num">04</div>
-        <div class="step-text">Bekræft tallene og klik <strong style="color:var(--text)">Gem Snapshot</strong> i formularen ovenfor</div>
-      </div>
-    </div>
-
-    <a class="bookmarklet-link" id="bookmarkletLink" href="#">⚡ CaseHub Tæller</a>
-    <div class="drag-hint">← Træk denne knap op til bogmærkelinjen i din browser</div>
-
-    <div style="margin-top: 20px; padding: 16px; background: var(--bg); border-radius: 8px; border: 1px solid var(--border)">
-      <div style="font-size: 0.65rem; color: var(--muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.08em">Alternativ — Kopier koden manuelt og lav et nyt bogmærke med denne URL:</div>
-      <textarea id="bookmarkletCode" readonly style="width:100%; background: transparent; border: none; color: var(--muted); font-family: var(--font-mono); font-size: 0.65rem; resize: none; height: 60px; outline: none; line-height: 1.5;" onclick="this.select()"></textarea>
-    </div>
-  </div>
-
   <!-- HISTORY -->
   <div class="history-section">
     <div class="history-header">
@@ -906,50 +833,7 @@ function saveData(data) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 }
 
-// ─── Bookmarklet ─────────────────────────────────────────────────────────────
-const dashboardUrl = window.location.href.split('?')[0];
 
-const bookmarkletCode = `javascript:(function(){
-  var counts={approved:0,rejected:0,new_cases:0,pending:0,cancelled:0};
-  var text=document.body.innerText.toLowerCase();
-  
-  // Strategy 1: Look for status labels near numbers in tables
-  var rows=document.querySelectorAll('tr, .case-row, [class*="row"], [class*="item"]');
-  rows.forEach(function(r){
-    var t=r.innerText.toLowerCase();
-    var num=parseInt((r.innerText.match(/\\b(\\d+)\\b/)||[])[1])||1;
-    if(t.includes('godkendt')||t.includes('approved'))counts.approved+=num;
-    else if(t.includes('afvist')||t.includes('rejected')||t.includes('denied'))counts.rejected+=num;
-    else if(t.includes('annulleret')||t.includes('cancelled')||t.includes('canceled'))counts.cancelled+=num;
-    else if(t.includes('behandling')||t.includes('pending')||t.includes('under')||t.includes('tilbud'))counts.pending+=num;
-    else if(t.includes('ny')||t.includes('new')||t.includes('indkomm'))counts.new_cases+=num;
-  });
-  
-  // Strategy 2: Look for badge/chip elements with status text
-  var badges=document.querySelectorAll('[class*="badge"],[class*="status"],[class*="chip"],[class*="tag"],[class*="label"],[class*="state"]');
-  badges.forEach(function(b){
-    var t=b.innerText.toLowerCase().trim();
-    if(t==='godkendt'||t==='approved')counts.approved++;
-    else if(t==='afvist'||t==='rejected')counts.rejected++;
-    else if(t==='annulleret'||t==='cancelled')counts.cancelled++;
-    else if(t.includes('behandling')||t.includes('tilbud')||t==='pending')counts.pending++;
-    else if(t==='ny'||t==='new')counts.new_cases++;
-  });
-
-  var total=counts.approved+counts.rejected+counts.new_cases+counts.pending+counts.cancelled;
-  var msg=total>0?
-    'Fandt '+total+' sager!\\n\\nGodkendte: '+counts.approved+'\\nAfviste: '+counts.rejected+'\\nTilbud/Kladder: '+counts.new_cases+'\\nAfventer godkendelse: '+counts.pending+'\\nAnnullerede: '+counts.cancelled+'\\n\\nKlik OK for at åbne dashboard med disse tal.':
-    'Kunne ikke automatisk tælle sager fra denne side.\\nPrøv at navigere til sagsoversigten i CaseHub.\\n\\nKlik OK for at åbne dashboard alligevel.';
-  
-  if(confirm(msg)){
-    var url='${dashboardUrl}?approved='+counts.approved+'&rejected='+counts.rejected+'&new_cases='+counts.new_cases+'&pending='+counts.pending+'&cancelled='+counts.cancelled;
-    window.open(url,'_blank');
-  }
-})();`;
-
-const minified = bookmarkletCode.replace(/\n\s+/g, ' ').replace(/\n/g, '');
-document.getElementById('bookmarkletLink').href = minified;
-document.getElementById('bookmarkletCode').value = minified;
 
 // ─── Read data from bookmarklet (URL params or localStorage) ─────────────────
 function readUrlParams() {
