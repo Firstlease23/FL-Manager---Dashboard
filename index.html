@@ -943,8 +943,9 @@ const minified = bookmarkletCode.replace(/\n\s+/g, ' ').replace(/\n/g, '');
 document.getElementById('bookmarkletLink').href = minified;
 document.getElementById('bookmarkletCode').value = minified;
 
-// ─── Read URL params (from bookmarklet) ──────────────────────────────────────
+// ─── Read data from bookmarklet (URL params or localStorage) ─────────────────
 function readUrlParams() {
+  // Method 1: URL params
   const p = new URLSearchParams(window.location.search);
   if (p.has('approved')) {
     document.getElementById('in-approved').value = p.get('approved') || 0;
@@ -954,7 +955,25 @@ function readUrlParams() {
     document.getElementById('in-cancelled').value = p.get('cancelled') || 0;
     showToast('⚡ Data indlæst fra CaseHub — tjek tallene og gem snapshot!');
     window.history.replaceState({}, '', window.location.pathname);
+    return;
   }
+  // Method 2: localStorage (set by bookmarklet before opening dashboard)
+  try {
+    const raw = localStorage.getItem('casehub_import');
+    if (raw) {
+      const d = JSON.parse(raw);
+      // Only use if less than 5 minutes old
+      if (Date.now() - d.ts < 5 * 60 * 1000) {
+        document.getElementById('in-approved').value = d.approved || 0;
+        document.getElementById('in-rejected').value = d.rejected || 0;
+        document.getElementById('in-new').value = d.new_cases || 0;
+        document.getElementById('in-pending').value = d.pending || 0;
+        document.getElementById('in-cancelled').value = d.cancelled || 0;
+        showToast('⚡ Data indlæst fra CaseHub — tjek tallene og gem snapshot!');
+      }
+      localStorage.removeItem('casehub_import');
+    }
+  } catch(e) {}
 }
 
 // ─── Add entry ───────────────────────────────────────────────────────────────
